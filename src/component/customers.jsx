@@ -15,7 +15,7 @@ export default function HappyCustomer(){
                     confidence.
                 </p>
             </div>
-            <div className='md:max-h-sm h-[500px]'>
+            <div className='md:max-h-sm h-[500px] w-max'>
                 <img src={Happy} alt="happy-customer.svg" className='object-cover h-full w-full'/>
             </div>
         </div>
