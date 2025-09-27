@@ -15,33 +15,33 @@ export default function SwiperCard(){
           pagination={{dynamicBullets:true}}
           freeMode={true}
           modules={[FreeMode,Pagination]}
-          className="mySwiper mt-20 mb-5"
+          className="mySwiper mt-10"
         >
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group} alt="Doc.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group1} alt="Offer.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group} alt="Doc.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group1} alt="Offer.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group} alt="Doc.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group1} alt="Offer.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group} alt="Doc.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group1} alt="Offer.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
-          <SwiperSlide className="p-5">
+          <SwiperSlide>
             <img src={Group} alt="Doc.svg" className="brightness-[0.85] mb-5" />
           </SwiperSlide>
         </Swiper>

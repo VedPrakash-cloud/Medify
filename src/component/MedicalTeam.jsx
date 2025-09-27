@@ -63,17 +63,17 @@ export default function MedicalTeam() {
         </h1>
         <Swiper
           spaceBetween={1}
-          slidesPerView={5}
+          slidesPerView={3}
           pagination={{dynamicBullets:true}}
           freeMode={true}
           modules={[FreeMode, Pagination]}
           className="mySwiper"
         >
           {items.map((card) => (
-            <SwiperSlide key={nanoid()} className="py-10">
+            <SwiperSlide key={nanoid()} className="py-5">
                 <img src={card.img} alt={card.name} className="drop-shadow-xl " />
-                <h6 className="font-poppins text-[#1B3C74] -mt-5">{card.name}</h6>
-                <p className="text-[#2AA7FF]">{card.category}</p>
+                <h6 className="font-poppins text-[#1B3C74] text-xs">{card.name}</h6>
+                <p className="text-[#2AA7FF] text-xs">{card.category}</p>
             </SwiperSlide>
           ))}
         </Swiper>
