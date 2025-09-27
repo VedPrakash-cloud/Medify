@@ -69,12 +69,12 @@ export default function SearchItem() {
   };
 
   return (
-    <div className="relative z-20 -mt-[250px] z-0">
-      <div className="container mx-auto px-20 ">
+    <div className="relative -mt-[250px]">
+      <div className="container mx-auto md:px-20">
         <div className="bg-white shadow-lg shadow-gray-300 rounded-lg p-6 flex flex-col gap-6">
-          <div className="flex justify-end items-center gap-10 mb-10">
+          <div className="flex md:flex-row justify-center items-center gap-4 mb-10">
           <div id="state"
-          className="flex shadow-md flex-col md:flex-row items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-1/4 py-2 px-2">
+          className="flex shadow-md items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-2/4 md:w-1/4 py-2 px-2">
             <SlMagnifier />
             <select
               key={states.name}
@@ -91,7 +91,7 @@ export default function SearchItem() {
             </select>
           </div>
           <div id="city" 
-          className=" shadow-md flex flex-col mr-20 md:flex-row bg-blue-50 items-center font-poppins border border-blue-50 text-gray-400 rounded-xl border w-1/4 py-2 px-2">
+          className=" shadow-md flex items-center font-poppins border border-blue-50 bg-blue-50 text-gray-400 rounded-xl w-2/4 md:w-1/4 py-2 px-2">
             <SlMagnifier/>
             <select
               key={city.name}
@@ -113,7 +113,7 @@ export default function SearchItem() {
               type="submit"
               id="searchBtn"
               onClick={() => console.log(medicalCenter)}
-              className="shadow-lg flex items-center gap-3 w-full md:w-auto px-6 py-2 bg-sky-500 text-white rounded-md font-semibold font-poppins"
+              className="shadow-lg flex items-center justify-center gap-2 w-auto md:w-auto px-3 md:px-6 py-2 bg-sky-500 text-white rounded-md font-semibold font-poppins"
             >
               <SlMagnifier />
               Search
@@ -124,7 +124,7 @@ export default function SearchItem() {
             <h3 className="font-poppins text-center text-xl font-semibold mb-5">
               You may be looking for
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            <div className="grid grid-cols w-3/5 md:w-full justify-self-center md:grid-cols-5 gap-4 text-center">
               <div className="p-5 bg-sky-100 rounded-md flex flex-col items-center">
                  <img src={Doctor} alt="doctor.svg" className="text-sky-500 mb-5" />
                 <p className="text-gray-300">Doctors</p>

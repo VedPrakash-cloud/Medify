@@ -63,7 +63,7 @@ export default function MedicalTeam() {
         </h1>
         <Swiper
           spaceBetween={1}
-          slidesPerView={4}
+          slidesPerView={5}
           pagination={{dynamicBullets:true}}
           freeMode={true}
           modules={[FreeMode, Pagination]}

@@ -52,7 +52,7 @@ export default function FindSpecialist(){
         <div>
             <div className='bg-blue-100'>
                 <h1 className="text-4xl font-poppins font-semibold text-[#1B3C74] pt-10">Find by Specialisation</h1>
-            <div className="grid grid-flow-col grid-rows-2 gap-4 p-10">
+            <div className="grid grid-col w-3/4 md:w-full justify-self-center md:grid-flow-col md:grid-rows-2 gap-4 p-10">
                 {items.map((card)=>(
                 <div key={nanoid()} className="flex flex-col items-center justify-center bg-white rounded-lg shadow-md py-5">
                     <img src={card.img} alt={card.name} width={80} className='mb-3'/>
