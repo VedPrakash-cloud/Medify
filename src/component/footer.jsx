@@ -3,8 +3,8 @@ import { FaFacebookF, FaTwitter, FaYoutube, FaPinterest } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col text-start items-center bg-[#1B3C74]">
-      <div className="flex p-6 justify-between w-3/4 font-poppins">
+    <div className="flex flex-col text-start items-center bg-[#1B3C74] p-6 md:p-10">
+      <div className="flex justify-between w-3/4 font-poppins">
         <div className="flex flex-col justify-between w-min mb-3">
           <img
             src={logo}
@@ -18,7 +18,7 @@ export default function Footer() {
             <FaPinterest size={30} className="p-2 bg-white rounded-2xl"/>
           </div>
         </div>
-        <ol className="leading-10 text-white text-sm font-semibold">
+        <ol className="leading-10 text-white text-xs md:text-[16px] font-base md:font-semibold">
             <li>
                 &gt; About us
             </li>
@@ -35,7 +35,7 @@ export default function Footer() {
                 &gt; Privacy Policy
             </li>
         </ol>
-        <ol className="leading-10 text-white text-sm font-semibold">
+        <ol className="leading-10 text-white text-xs md:text-[16px] font-base md:font-semibold">
             <li>
                 &gt; Orthology
             </li>
@@ -52,7 +52,7 @@ export default function Footer() {
                 &gt; Cardiology
             </li>
         </ol>
-        <ol className="leading-10 text-white text-sm font-semibold">
+        <ol className="leading-10 text-white text-xs md:text-[16px] font-base md:font-semibold">
             <li>
                 &gt; About us
             </li>

@@ -3,8 +3,8 @@ import Blue from '../assets/blueTick.svg';
 
 export default function PatientCaring(){
     return(
-        <div className='flex bg-blue-50 p-6 md:p-20 gap-10 items-center'>
-            <img src={oldAge} alt="patients.svg" className='max-h-sm md:h-full max-w-sm md:w-full' />
+        <div className='flex bg-blue-50 p-6 md:p-20 gap-5 items-center'>
+            <img src={oldAge} alt="patients.svg" className='max-h-xs md:max-h-sm max-w-xs md:max-w-sm' />
             <div className='font-poppins text-start max-h-sm md:h-full mt-10 md:mt-0 text-sm/7'>
                 <p className=' text-[#2AA7FF] font-semibold text-xs'>HELPING PATIENTS FROM AROUND THE GLOBE!!</p>
                 <div className='flex gap-2 my-2'>

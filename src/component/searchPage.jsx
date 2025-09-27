@@ -131,7 +131,7 @@ export default function SearchItem() {
             <h3 className="font-poppins text-center text-xl font-semibold mb-5">
               You may be looking for
             </h3>
-            <div className="grid grid-cols w-3/5 md:w-full justify-self-center grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            <div className="grid grid-cols w-full md:w-3/5 justify-self-center grid-cols-2 md:grid-cols-5 gap-4 text-center">
               <div className="p-5 bg-sky-100 rounded-md flex flex-col items-center">
                 <img
                   src={Doctor}

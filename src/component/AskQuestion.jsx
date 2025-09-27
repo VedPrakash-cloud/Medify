@@ -16,19 +16,17 @@ export default function QNA() {
 
 
   return (
-    <div className="h-full flex flex-col font-poppins py-6 px-10">
+    <div className="h-full font-poppins py-6 px-10">
       <h1 className="text-[#2AA7FF] text-sm font-semibold m-3">
         Get Your Answer
       </h1>
       <p className="text-[#1B3C74] text-4xl font-semibold m-2">
         Frequently Asked Questions
       </p>
-      <div className="flex items-center h-[400px]">
-        <img src={Ask} alt="Q&A.svg" className="object-contain h-full w-full "/>
-
-
+      <div className="flex flex-col md:flex-row md:items-center justify-center h-full md:h-[400px]">
+        <img src={Ask} alt="Q&A.svg" className="object-contain h-96 w-96 "/>
         {/*Accordian start here */}
-        <div className="w-[600px] max-w-2xl text-start mr-20">
+        <div className="text-start mr-20">
             <Accordion
             expanded = {expanded === "panel1"}
             onChange={handleChange('panel1')}
@@ -41,7 +39,7 @@ export default function QNA() {
           >
             <Typography sx={{color:'#1B3C74', fontWeight:'bold',fontSize:14, fontFamily:'poppins'}} component="span">Why choose our medical for your family?</Typography>
           </AccordionSummary>
-          <AccordionDetails className="font-semibold">
+          <AccordionDetails>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. A, recusandae officia. Explicabo, ducimus. Non molestiae sequi consequatur quia, exercitationem
           </AccordionDetails>
         </Accordion>
