@@ -16,7 +16,7 @@ export default function QNA() {
 
 
   return (
-    <div className="h-full font-poppins py-6 px-10">
+    <div className="h-full bg-white font-poppins py-6 px-10">
       <h1 className="text-[#2AA7FF] text-sm font-semibold m-3">
         Get Your Answer
       </h1>

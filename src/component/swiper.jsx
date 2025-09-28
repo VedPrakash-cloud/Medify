@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 
 export default function SwiperCard(){
     return (
-        <div>
+        <div className="bg-white pt-1">
         <Swiper
           spaceBetween={1}
           slidesPerView={3}

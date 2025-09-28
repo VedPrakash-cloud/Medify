@@ -1,4 +1,5 @@
 import Hero from "../assets/hero_image.svg";
+import { Link } from "react-router-dom";
 
 export default function HeroCard() {
   return (
@@ -20,9 +21,11 @@ export default function HeroCard() {
           Connect instantly with a 24x7 specialist or choose to video visit a
           particular doctor.
         </p>
-        <button className="bg-sky-500 px-5 py-2 text-white w-min text-nowrap rounded-xl mt-3">
-          Find Centers
-        </button>
+        <Link to="search">
+          <button className="bg-sky-500 px-5 py-2 text-white w-min text-nowrap rounded-xl mt-3">
+            Find Centers
+          </button>
+        </Link>
         </div>
         <img src={Hero} alt="hero.svg" />
       </div>
