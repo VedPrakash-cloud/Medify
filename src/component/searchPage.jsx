@@ -3,10 +3,10 @@ import Drug from "../assets/Drugstore.svg";
 import Capsule from "../assets/Capsule.svg";
 import Ambulance from "../assets/Ambulance.svg";
 import Doctor from "../assets/Doctor.svg";
-import Search from '../seach/seachBox'
+import Search from '../seach/seachBox';
 
 export default function SearchItem() {
-
+  
   return (
     <div className="relative -mt-[250px]">
       <div className="container mx-auto md:px-20">

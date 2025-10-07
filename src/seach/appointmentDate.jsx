@@ -1,57 +1,48 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import TabList from "@mui/material/Tabs";
 import TabContext from "@mui/lab/TabContext";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
 
-export default function ScrollableTabsButtonAuto() {
-  const [value, setValue] = useState("today");
 
+export default function AppointmentDate() {
+  const [value, setValue] = useState("today");
+  
   const slotsDate = {
-    today: {
       morning: ["11:00 AM", "11:30 AM"],
       afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
       evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 11,
-    },
-    tomorrow: {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
-    "wed-1-oct": {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
-    "thu-2-oct": {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
-    "fri-3-oct": {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
-    "sat-4-oct": {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
-    "sun-5-oct": {
-      morning: ["10:00 AM", "11:00 AM", "11:30 AM"],
-      afternoon: ["12:00 PM", "12:30 PM", "01:30 PM", "02:00 PM", "02:30 PM"],
-      evening: ["06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"],
-      available: 12,
-    },
   };
+
+  const weekSlots = useMemo(()=>{
+    const days = [];
+    const today = new Date();
+
+    for(let i = 0; i < 7; i++){
+      const current = new Date();
+      current.setDate(today.getDate() + i);
+
+      const dayName = 
+      i === 0
+      ? "Today"
+      : i === 1
+      ?"Tomorrow"
+      : current.toLocaleDateString("en-US", {weekday: "short"})
+
+      const formattedDate = current.toLocaleDateString("en-US",{
+        month: "short",
+        day:"numeric"
+      });
+
+      days.push({
+        key: dayName.toLowerCase(),
+        label: i <= 1 ? dayName :`${dayName}, ${formattedDate}`,
+        slots:{...slotsDate},
+      })
+    }
+    return days;
+  },[]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,11 +51,14 @@ export default function ScrollableTabsButtonAuto() {
   const renderSlots =(slots)=>{
     return (
         <Box>
+          <div
+          className="flex gap-1 md:gap-5 text-xs md:text-base text-nowrap">
         {slots.map((time)=>(
-        <button key={time} className="mx-2 border border-sky-500 text-sky-500 font-poppins font-semibold p-2 rounded-lg">
-            {time}
-        </button>
+            <button key={time} onClick={()=>console.log(time)} className="border border-sky-500 text-sky-500 font-poppins font-semibold p-1 rounded-lg">
+              {time}
+            </button>
     ))}
+    </div>
     </Box>
     )
   }
@@ -72,50 +66,58 @@ export default function ScrollableTabsButtonAuto() {
   return (
     <Box
       sx={{
-        maxWidth: { xs: 320, sm: 480, lg: 680 },
+        maxWidth: { xs: 380, sm: 520, lg: 750 },
         bgcolor: "background.paper",
         margin:'auto',
       }}
     >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box >
           <TabList
             value={value}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons="auto"
+            scrollButtons={true}
             allowScrollButtonsMobile={true}
-            aria-label="scrollable tabs always showing buttons"
-          >
-            {Object.entries(slotsDate).map(([dayKey, dayData]) =>(
+            >
+            {weekSlots.map((day) =>(
                 <Tab
                 label={
-                    <Box>
+                    <Box
+                    sx={{
+                      display:"flex",
+                      flexDirection:"column",
+                      width:'170px',
+                      fontFamily:"poppins"
+                    }}>
                         <div>
-                            {dayKey.charAt(0).toUpperCase()+ dayKey.slice(1).replace(/-/g, '')}
+                            {day.label}
                         </div>
-                        <span>
-                            {dayData.available} Slots Available
+                        <span className="text-green-600 text-xs">
+                            {
+                              day.slots.morning.length +
+                              day.slots.afternoon.length +
+                              day.slots.evening.length}{" "}
+                              Slots Available
                         </span>
                     </Box>
                 }
-                value={dayKey}
-                key={dayKey}
+                value={day.key}
+                key={day.key}
                 />
             ))}
           </TabList>
         </Box>
-          {Object.entries(slotsDate).map(([dayName, dayData]) => (
-            <TabPanel value={dayName} key={dayName}>
-                <div className="border">
+          {weekSlots.map((day) => (
+            <TabPanel value={day.key} key={day.key}>
+                <div className="h-auto my-5">
                     <Box sx={{
                         display:'flex',
-                        justifyContent:'start',
                         alignItems:'center',
-                        margin:'10px'
+                        margin: '10px',
                     }}>
-                        <div>Morning:</div>
-                        <div className="border">{renderSlots(dayData.morning)}</div>
+                        <div
+                        className="flex items-center gap-2 md:gap-5 border-b pb-3 w-full">Morning:{renderSlots(day.slots.morning)}</div>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -123,8 +125,8 @@ export default function ScrollableTabsButtonAuto() {
                         alignItems:'center',
                         margin:'10px'
                     }}>
-                        <div>Afternoon:</div>
-                        <div>{renderSlots(dayData.afternoon)}</div>
+                        <div
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Afternoon:{renderSlots(day.slots.afternoon)}</div>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -132,8 +134,8 @@ export default function ScrollableTabsButtonAuto() {
                         alignItems:'center',
                         margin:'10px'
                     }}>
-                        <div>Evening:</div>
-                        <div>{renderSlots(dayData.evening)}</div>
+                        <div
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Evening:{renderSlots(day.slots.evening)}</div>
                     </Box>
                 </div>
             </TabPanel>

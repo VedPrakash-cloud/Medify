@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { SlMagnifier } from "react-icons/sl";
 import { nanoid } from "nanoid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+// import { Api } from "@mui/icons-material";
 
 
-export default function SearchItems() {
+export default function SearchItems({onSearch}) {
   const [states, setStates] = useState([]);
   const [city, setCity] = useState([]);
-  const [medicalCenter, setMedicalCenter] = useState([]);
 
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // {API CALL STARTS FROM HERE FOR STATE & CITY}****************
 
   useEffect(() => {
     const fetchState = async () => {
@@ -28,14 +31,6 @@ export default function SearchItems() {
     };
     fetchState();
   }, []);
-
-  const handleSearch = ()=>{
-    navigate('/search',{state:{
-      hospitals:medicalCenter,
-      city: selectedCity,
-      state:selectedState
-    }})
-  }
 
   useEffect(() => {
     if (!selectedState) return;
@@ -52,32 +47,23 @@ export default function SearchItems() {
     fetchCity();
   }, [selectedState]);
 
-  useEffect(() => {
-    if (!selectedCity) return;
-    const fetchMedicalCenter = async () => {
-      try {
-        const res = await axios.get(
-          `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
-        );
-        setMedicalCenter(res.data);
-      } catch (err) {
-        console.error("Unable to fetch Medical center", err);
-      }
-    };
-    fetchMedicalCenter();
-  }, [selectedState, selectedCity]);
+  // API CALL FUNCTION ENDS HERE**********************
 
-  const handleChange = (e) => {
-    setSelectedState(e.target.value);
-  };
+  const handleSearch = (e)=>{
+    e.preventDefault();
+    if(!selectedState && !selectedCity) return;
+    if(location.pathname === '/search'){
+      onSearch?.(selectedState, selectedCity);
+    }else{
+      navigate(`/search?state=${selectedState}&city=${selectedCity}`)
+    }
+  }
 
-  const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
-  };
   return (
     <div>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-10">
+      <form type='submit' onSubmit={handleSearch} className="flex flex-col md:flex-row justify-center items-center gap-10">
         <div className="w-full md:w-3/4 flex justify-center gap-10">
+          {/*STATE DROPDOWN*/}
           <div
             id="state"
             className="flex shadow-md items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-2/4 md:w-2/5 py-2 px-2"
@@ -87,7 +73,7 @@ export default function SearchItems() {
               key={states.name}
               className="focus:outline-none appearance-none px-2 bg-transparent w-full"
               value={selectedState}
-              onChange={handleChange}
+              onChange={(e)=>setSelectedState(e.target.value)}
             >
               <option value="State">State</option>
               {states.map((data) => (
@@ -97,6 +83,8 @@ export default function SearchItems() {
               ))}
             </select>
           </div>
+
+          {/*CITY DROPDOWN*/}
           <div
             id="city"
             className=" shadow-md flex items-center font-poppins border border-blue-50 bg-blue-50 text-gray-400 rounded-xl w-2/4 md:w-2/5 py-2 px-2"
@@ -107,7 +95,7 @@ export default function SearchItems() {
               className="focus:outline-none appearance-none px-2 bg-transparent w-full"
               value={selectedCity}
               disabled={!selectedState}
-              onChange={handleCityChange}
+              onChange={(e)=>setSelectedCity(e.target.value)}
             >
               <option value="City">City</option>
               {city.map((cities) => (
@@ -118,16 +106,17 @@ export default function SearchItems() {
             </select>
           </div>
         </div>
+
+        {/*DYNAMIC SEARCH BUTTON*/}
         <button
           type="submit"
           id="searchBtn"
-          onClick={handleSearch}
           className="shadow-lg flex items-center justify-center gap-2 w-auto md:w-auto px-3 md:px-6 py-2 bg-sky-500 text-white rounded-md font-semibold font-poppins"
         >
           <SlMagnifier />
           Search
         </button>
-      </div>
+      </form>
     </div>
   );
 }

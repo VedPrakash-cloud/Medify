@@ -3,41 +3,84 @@ import { useLocation } from "react-router-dom";
 import HospitalCard from "../seach/HospitalCard";
 import Advertisment from "../assets/Advertisment.svg";
 import { Verified } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Appointment() {
   const location = useLocation();
-  const hospitals = location.state?.hospitals || [];
-  const city = location.state?.city;
-  const state = location.state?.state;
+  const searchParams = new URLSearchParams(location.search)
+  const stateParams = searchParams.get('state');
+  const cityParams = searchParams.get('city');
+
+
+  const [hospitals, setHospitals] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState(stateParams || "");
+  const [city, setCity] = useState(cityParams || "");
+
+  const fetchMedicalCenter = async (selectedState, selectedCity) => {
+        if(!selectedState || !selectedCity) return;
+        setLoading(true);
+        try {
+          const res = await axios.get(
+            `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
+          );
+          setHospitals(res.data);
+          setState(selectedState);
+          setCity(selectedCity);
+        } catch (err) {
+          console.error("Unable to fetch Medical center", err);
+        }finally{
+          setLoading(false);
+        }
+      };
+
+      useEffect(()=>{
+      if(stateParams && cityParams){
+        fetchMedicalCenter(stateParams, cityParams);
+      }
+    }, [stateParams, cityParams]);
+
+      const handleSearch = (newState, newCity)=>{
+         fetchMedicalCenter(newState, newCity);
+      }
+
 
   return (
     <>
       <div className="bg-sky-500 rounded-b-2xl flex flex-col items-center mb-5">
         <div className="bg-white w-3/4 shadow-md rounded-xl p-4 relative -bottom-10">
-          <Search />
+          <Search onSearch={handleSearch}/>
         </div>
       </div>
       <div className="mt-20 font-poppins p-6">
         <div className="flex md:justify-center text-start">
-          <div className="w-3/4">
-            <p className="font-semibold text-lg">
+            {!state ? (
+              <p>Please select a State and City...</p>
+            ):(
+              <div className="w-3/4">
+              <p className="font-semibold text-lg">
               {hospitals.length} medical centers available in{" "}
-              {city.toLowerCase()}, {state}
+              {city ? city.toLowerCase() : "Your City"},{" "}
+              {state ? state : "Your State"}
             </p>
-            <div className="flex items-center gap-5">
               <Verified className="bg-transparent" />
               <p className="text-sm text-gray-400">
                 Book appointments with minimum wait-time & verified doctor
                 details
               </p>
             </div>
+            )}
           </div>
-        </div>
         <div className=" flex justify-center gap-10 pt-5">
-          <div>
-            {hospitals.map((hospital) => (
-              <HospitalCard key={hospital["Provider ID"]} data={hospital} />
-            ))}
+          <div className="w-4/5 md:w-3/5">
+            {hospitals.length > 0 ? (
+                hospitals.map((hospital) => (
+                  <HospitalCard key={hospital["Provider ID"]} data={hospital} />
+                ))
+              ):(
+                <p>No Hospital found...</p>
+            )}
           </div>
           <div className="h-64 w-64">
             <img src={Advertisment} alt="Add.svg" />

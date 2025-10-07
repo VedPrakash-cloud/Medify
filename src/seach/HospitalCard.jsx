@@ -7,9 +7,11 @@ import Dates from './appointmentDate';
 
 export default function Hospitals ({data}){
     const[isDate, setIsDate] = useState(false);
+    const [slotsOpen, setSlotsOpen] = useState(false);
 
     const handleClick = ()=>{
         setIsDate((prev)=> !prev);
+        setSlotsOpen((prev)=>!prev);
     }
     return (
         <div className='mb-10'>
@@ -26,7 +28,12 @@ export default function Hospitals ({data}){
                 </div>
                 <div className='h-32 grid content-end'>
                     <p className='text-green-500 font-semibold text-[10px] md:text-sm'>Available Today</p>
-                    <button className='bg-sky-500 text-white text-[10px] md:text-sm py-2 px-3 md:px-4 rounded-lg' onClick={handleClick}>Book FREE Center Visit</button>
+                    <button className='bg-sky-500 text-white text-[10px] md:text-sm py-2 px-3 md:px-4 rounded-lg' onClick={handleClick}>
+                        {slotsOpen ?(
+                            <p>Hide Booking Calender</p>
+                        ):(
+                            <p>Book FREE Center Visit</p>
+                        )}</button>
                 </div>
             </div>
             {isDate && (<Dates />)}
