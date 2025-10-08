@@ -59,11 +59,11 @@ export default function Appointment() {
               <p>Please select a State and City...</p>
             ):(
               <div className="w-3/4">
-              <p className="font-semibold text-lg">
+              <h1 className="font-semibold text-lg">
               {hospitals.length} medical centers available in{" "}
               {city ? city.toLowerCase() : "Your City"},{" "}
               {state ? state : "Your State"}
-            </p>
+            </h1>
               <div className="flex items-center gap-5">
                 <Verified className="bg-transparent" />
               <p className="text-sm text-gray-400">
