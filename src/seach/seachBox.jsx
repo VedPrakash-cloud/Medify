@@ -109,7 +109,7 @@ export default function SearchItems({onSearch}) {
 
         {/*DYNAMIC SEARCH BUTTON*/}
         <button
-          type="submit"
+          type="button"
           id="searchBtn"
           className="shadow-lg flex items-center justify-center gap-2 w-auto md:w-auto px-3 md:px-6 py-2 bg-sky-500 text-white rounded-md font-semibold font-poppins"
         >
