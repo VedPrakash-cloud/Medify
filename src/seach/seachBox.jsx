@@ -69,7 +69,6 @@ export default function SearchItems({onSearch}) {
             className="flex shadow-md items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-2/4 md:w-2/5 py-2 px-2"
           >
             <SlMagnifier />
-            <ul>
             <select
               key={states.name}
               className="focus:outline-none appearance-none px-2 bg-transparent w-full"
@@ -78,14 +77,11 @@ export default function SearchItems({onSearch}) {
             >
               <option value="State">State</option>
               {states.map((data) => (
-                <li>
                 <option key={nanoid()} value={data}>
                   {data}
                 </option>
-                </li>
               ))}
             </select>
-            </ul>
           </div>
 
           {/*CITY DROPDOWN*/}
@@ -94,7 +90,6 @@ export default function SearchItems({onSearch}) {
             className=" shadow-md flex items-center font-poppins border border-blue-50 bg-blue-50 text-gray-400 rounded-xl w-2/4 md:w-2/5 py-2 px-2"
           >
             <SlMagnifier />
-            <ul>
             <select
               key={city.name}
               className="focus:outline-none appearance-none px-2 bg-transparent w-full"
@@ -104,14 +99,11 @@ export default function SearchItems({onSearch}) {
             >
               <option value="City">City</option>
               {city.map((cities) => (
-                <li>
                 <option key={nanoid()} value={cities}>
                   {cities}
                 </option>
-                </li>
               ))}
             </select>
-            </ul>
           </div>
         </div>
 

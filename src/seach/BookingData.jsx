@@ -7,7 +7,7 @@ export default function BookingDetails() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const storedData = localStorage.getItem("BookingDetails");
+    const storedData = localStorage.getItem("bookings");
     if (storedData) {
       setBookings(JSON.parse(storedData));
     }

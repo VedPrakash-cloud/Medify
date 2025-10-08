@@ -10,6 +10,7 @@ export default function ConfirmAppointment({
 }) {
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
+  const[error, setError] = useState(false);
 
   const handleSnackBar = () => {
     setOpen(false);
@@ -20,11 +21,7 @@ export default function ConfirmAppointment({
   const handleClick = (e) => {
     e.preventDefault();
     if (!email) {
-      <Snackbar
-        open={open}
-        onClose={handleSnackBar}
-        message="Please enter a valid email address"
-      />;
+      setError(true)
       return;
     }
 
@@ -97,6 +94,12 @@ export default function ConfirmAppointment({
         autoHideDuration={3000}
         onClose={handleSnackBar}
         message="Booking Confirmed"
+      />
+      <Snackbar
+      open={error}
+      autoHideDuration={3000}
+      onClose={()=>setError(false)}
+      message="Please enter a valid email address"
       />
     </div>
   );
