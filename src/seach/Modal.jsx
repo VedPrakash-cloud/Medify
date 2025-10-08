@@ -35,9 +35,9 @@ export default function ConfirmAppointment({
       email,
     };
 
-    const existing = JSON.parse(localStorage.getItem("BookingDetails")) || [];
+    const existing = JSON.parse(localStorage.getItem("bookings")) || [];
     localStorage.setItem(
-      "BookingDetails",
+      "bookings",
       JSON.stringify([...existing, booking])
     );
 

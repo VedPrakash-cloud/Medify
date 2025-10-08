@@ -24,7 +24,7 @@ export default function Hospitals ({data, isBookingPage=false}){
                     <img src={Hospital} alt="hospitals.svg" />
                 </div>
                 <div className='font-poppins text-start w-80'>
-                    <h1 className='text-sky-500 font-semibold mb-3'>{hospitalInfo['Hospital Name']}</h1>
+                    <h3 className='text-sky-500 font-semibold mb-3'>{hospitalInfo['Hospital Name']}</h3>
                     <span className='font-semibold text-sm'>{hospitalInfo.City},{hospitalInfo.State}</span>
                     <p className='text-sm'>{hospitalInfo['Hospital Type']}</p>
                     <img src={Consultation} alt="fees.svg" />

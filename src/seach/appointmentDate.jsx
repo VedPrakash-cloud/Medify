@@ -100,9 +100,9 @@ export default function AppointmentDate({hospital}) {
                       width:'170px',
                       fontFamily:"poppins"
                     }}>
-                        <div>
+                        <p>
                             {day.label}
-                        </div>
+                        </p>
                         <span className="text-green-600 text-xs">
                             {
                               day.slots.morning.length +
@@ -126,8 +126,8 @@ export default function AppointmentDate({hospital}) {
                         alignItems:'center',
                         margin: '10px',
                     }}>
-                        <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-3 w-full">Morning:{renderSlots(day.slots.morning, day)}</div>
+                        <p
+                        className="flex items-center gap-2 md:gap-5 border-b pb-3 w-full">Morning:{renderSlots(day.slots.morning, day)}</p>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -135,8 +135,8 @@ export default function AppointmentDate({hospital}) {
                         alignItems:'center',
                         margin:'10px'
                     }}>
-                        <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Afternoon:{renderSlots(day.slots.afternoon, day)}</div>
+                        <p
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Afternoon:{renderSlots(day.slots.afternoon, day)}</p>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -144,8 +144,8 @@ export default function AppointmentDate({hospital}) {
                         alignItems:'center',
                         margin:'10px'
                     }}>
-                        <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Evening:{renderSlots(day.slots.evening, day)}</div>
+                        <p
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Evening:{renderSlots(day.slots.evening, day)}</p>
                     </Box>
                 </div>
             </TabPanel>
