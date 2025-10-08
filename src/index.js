@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Search from './component/bookingAppointment';
 import HomePage from './component/homepage';
+import Booking from '../src/seach/BookingData'
 import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path:"search",
         element: <Search />
+      },
+      {
+        path:"booking",
+        element: <Booking />
       }
     ]
   }

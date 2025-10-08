@@ -29,7 +29,7 @@ export default function ConfirmAppointment({
     }
 
     const booking = {
-      hospital: hospital,
+      hospital,
       date: slot?.date,
       time: slot?.time,
       email,

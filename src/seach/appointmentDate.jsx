@@ -76,9 +76,9 @@ export default function AppointmentDate({hospital}) {
   return (
     <Box
       sx={{
-        maxWidth: { xs: 380, sm: 520, lg: 750 },
+        maxWidth: { xs: 380, sm: 520, lg: 770 },
         bgcolor: "background.paper",
-        margin:'auto',
+        marginTop:"-5px"
       }}
     >
       <TabContext value={value}>

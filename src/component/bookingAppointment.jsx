@@ -64,16 +64,18 @@ export default function Appointment() {
               {city ? city.toLowerCase() : "Your City"},{" "}
               {state ? state : "Your State"}
             </p>
-              <Verified className="bg-transparent" />
+              <div className="flex items-center gap-5">
+                <Verified className="bg-transparent" />
               <p className="text-sm text-gray-400">
                 Book appointments with minimum wait-time & verified doctor
                 details
               </p>
+              </div>
             </div>
             )}
           </div>
-        <div className=" flex justify-center gap-10 pt-5">
-          <div className="w-4/5 md:w-3/5">
+        <div className="flex mx-10 justify-center gap-10 pt-5">
+          <div className="w-3/4">
             {!loading && hospitals.length > 0 ? (
                 hospitals.map((hospital) => (
                   <HospitalCard key={hospital["Provider ID"]} data={hospital} />
@@ -82,7 +84,7 @@ export default function Appointment() {
                 <p>No Hospital found...</p>
             )}
           </div>
-          <div className="h-64 w-64">
+          <div>
             <img src={Advertisment} alt="Add.svg" />
           </div>
         </div>

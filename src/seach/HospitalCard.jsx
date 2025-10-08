@@ -4,7 +4,7 @@ import Like from '../assets/Like.svg';
 import Consultation from '../assets/consultation.svg';
 import Dates from './appointmentDate';
 
-export default function Hospitals ({data}){
+export default function Hospitals ({data, isBookingPage=false}){
     const[isDate, setIsDate] = useState(false);
     const [slotsOpen, setSlotsOpen] = useState(false);
 
@@ -12,20 +12,32 @@ export default function Hospitals ({data}){
         setIsDate((prev)=> !prev);
         setSlotsOpen((prev)=>!prev);
     }
+
+    const hospitalInfo = data.hospital ? data.hospital : data;
+
+
+
     return (
         <div className='mb-10'>
-            <div className='flex bg-white rounded-lg p-5 items-center shadow-lg'>
+            <div className='flex justify-between bg-white rounded-lg p-6 items-center shadow-lg'>
                 <div className='pr-2'>
                     <img src={Hospital} alt="hospitals.svg" />
                 </div>
-                <div className='font-poppins text-start'>
-                    <h1 className='text-sky-500 font-semibold mb-3'>{data['Hospital Name']}</h1>
-                    <span className='font-semibold text-sm'>{data.City},{data.State}</span>
-                    <p className='text-sm'>{data['Hospital Type']}</p>
+                <div className='font-poppins text-start w-80'>
+                    <h1 className='text-sky-500 font-semibold mb-3'>{hospitalInfo['Hospital Name']}</h1>
+                    <span className='font-semibold text-sm'>{hospitalInfo.City},{hospitalInfo.State}</span>
+                    <p className='text-sm'>{hospitalInfo['Hospital Type']}</p>
                     <img src={Consultation} alt="fees.svg" />
                     <img src={Like} alt="like_button.svg" />
                 </div>
-                <div className='h-32 grid content-end'>
+                {isBookingPage && (
+                    <div className='relative bottom-10 -mt-6 flex gap-2 items-center text-nowrap'>
+                        <span className='border border-sky-500 text-sky-500 font-poppins px-3 rounded-sm'>{data.time}</span>
+                        <span className='border border-green-500 text-green-500 font-poppins px-3 rounded-sm'>{data.date}</span>
+                    </div>
+                )}
+                {!isBookingPage && (
+                    <div className='relative top-10'>
                     <p className='text-green-500 font-semibold text-[10px] md:text-sm'>Available Today</p>
                     <button className='bg-sky-500 text-white text-[10px] md:text-sm py-2 px-3 md:px-4 rounded-lg' onClick={handleClick}>
                         {slotsOpen ?(
@@ -33,9 +45,10 @@ export default function Hospitals ({data}){
                         ):(
                             <p>Book FREE Center Visit</p>
                         )}</button>
-                </div>
+                    </div>
+                )}
             </div>
-            {isDate && (<Dates hospital={data}/>)}
+            {!isBookingPage && isDate && (<Dates hospital={hospitalInfo}/>)}
         </div>
     )
 }
