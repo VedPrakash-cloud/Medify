@@ -1,13 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo } from "react";
 import TabList from "@mui/material/Tabs";
 import TabContext from "@mui/lab/TabContext";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
+import ConfirmAppointment from './Modal';
 
 
-export default function AppointmentDate() {
+export default function AppointmentDate({hospital}) {
   const [value, setValue] = useState("today");
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const slotsDate = {
       morning: ["11:00 AM", "11:30 AM"],
@@ -38,23 +42,29 @@ export default function AppointmentDate() {
       days.push({
         key: dayName.toLowerCase(),
         label: i <= 1 ? dayName :`${dayName}, ${formattedDate}`,
+        actualDate: current.toLocaleDateString("en-US", {weekday:"short", month:"short", day:"numeric"}),
         slots:{...slotsDate},
       })
     }
     return days;
-  },[]);
+  },[slotsDate]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const renderSlots =(slots)=>{
+  const openModal = (dayLabel, time)=>{
+    setSelectedSlot({date:dayLabel, time});
+    setIsModalOpen(true);
+  }
+
+  const renderSlots =(slots, dayLabel)=>{
     return (
         <Box>
           <div
           className="flex gap-1 md:gap-5 text-xs md:text-base text-nowrap">
         {slots.map((time)=>(
-            <button key={time} onClick={()=>console.log(time)} className="border border-sky-500 text-sky-500 font-poppins font-semibold p-1 rounded-lg">
+            <button key={time} onClick={()=>openModal(dayLabel.actualDate, time)} className="border border-sky-500 text-sky-500 font-poppins font-semibold p-1 rounded-lg">
               {time}
             </button>
     ))}
@@ -117,7 +127,7 @@ export default function AppointmentDate() {
                         margin: '10px',
                     }}>
                         <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-3 w-full">Morning:{renderSlots(day.slots.morning)}</div>
+                        className="flex items-center gap-2 md:gap-5 border-b pb-3 w-full">Morning:{renderSlots(day.slots.morning, day)}</div>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -126,7 +136,7 @@ export default function AppointmentDate() {
                         margin:'10px'
                     }}>
                         <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Afternoon:{renderSlots(day.slots.afternoon)}</div>
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Afternoon:{renderSlots(day.slots.afternoon, day)}</div>
                     </Box>
                     <Box sx={{
                         display:'flex',
@@ -135,12 +145,20 @@ export default function AppointmentDate() {
                         margin:'10px'
                     }}>
                         <div
-                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Evening:{renderSlots(day.slots.evening)}</div>
+                        className="flex items-center gap-2 md:gap-5 border-b pb-5 w-full">Evening:{renderSlots(day.slots.evening, day)}</div>
                     </Box>
                 </div>
             </TabPanel>
       ))}
       </TabContext>
+
+      {/*Modal Component*/}
+      <ConfirmAppointment
+      isOpen = {isModalOpen}
+      onClose={()=>setIsModalOpen(false)}
+      slot={selectedSlot}
+      hospital={hospital}
+      />
     </Box>
   );
 }

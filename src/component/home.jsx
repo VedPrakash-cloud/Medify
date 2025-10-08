@@ -43,16 +43,18 @@ export default function NavBar() {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="flex flex-col gap-4 font-poppins font-semibold items-center bg-[#E7F0FF] px-6 py-4 md:hidden">
-          <div>Find Doctors</div>
-          <div>Hospitals</div>
-          <div>Medicines</div>
-          <div>Surgeries</div>
-          <div>Software for Provider</div>
-          <div>Facilities</div>
-          <button className="font-poppins bg-sky-500 rounded-md px-5 py-2 text-white">
-            My Bookings
-          </button>
-        </div>
+          <Link>Find Doctors</Link>
+          <Link to="search">Hospitals</Link>
+          <Link>Medicines</Link>
+          <Link>Surgeries</Link>
+          <Link>Software for Provider</Link>
+          <Link>Facilities</Link>
+          <Link>
+            <button className="bg-sky-500 rounded-md px-4 py-3 text-white">
+              My Bookings
+            </button>
+          </Link>
+          </div>
       )}
     </nav>
   );

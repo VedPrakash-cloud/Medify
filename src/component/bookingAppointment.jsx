@@ -74,7 +74,7 @@ export default function Appointment() {
           </div>
         <div className=" flex justify-center gap-10 pt-5">
           <div className="w-4/5 md:w-3/5">
-            {hospitals.length > 0 ? (
+            {!loading && hospitals.length > 0 ? (
                 hospitals.map((hospital) => (
                   <HospitalCard key={hospital["Provider ID"]} data={hospital} />
                 ))

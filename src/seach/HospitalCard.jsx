@@ -4,7 +4,6 @@ import Like from '../assets/Like.svg';
 import Consultation from '../assets/consultation.svg';
 import Dates from './appointmentDate';
 
-
 export default function Hospitals ({data}){
     const[isDate, setIsDate] = useState(false);
     const [slotsOpen, setSlotsOpen] = useState(false);
@@ -36,7 +35,7 @@ export default function Hospitals ({data}){
                         )}</button>
                 </div>
             </div>
-            {isDate && (<Dates />)}
+            {isDate && (<Dates hospital={data}/>)}
         </div>
     )
 }
