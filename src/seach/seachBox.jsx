@@ -13,6 +13,9 @@ export default function SearchItems({onSearch}) {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
+  const [openStateDropdown, setOpenStateDropdown] = useState(false);
+  const [openCityDropdown, setOpenCityDropDown] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,44 +69,76 @@ export default function SearchItems({onSearch}) {
           {/*STATE DROPDOWN*/}
           <div
             id="state"
-            className="flex shadow-md items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-2/4 md:w-2/5 py-2 px-2"
+            className="relative flex shadow-md items-center bg-blue-50 font-poppins text-gray-400 rounded-xl border border-blue-50 w-2/4 md:w-2/5 py-2 px-2 cursor-pointer"
           >
             <SlMagnifier />
-            <select
-              key={states.name}
-              className="focus:outline-none appearance-none px-2 bg-transparent w-full"
-              value={selectedState}
-              onChange={(e)=>setSelectedState(e.target.value)}
-            >
-              <option value="State">State</option>
-              {states.map((data) => (
-                <option key={nanoid()} value={data}>
-                  {data}
-                </option>
-              ))}
-            </select>
+            <div
+            className="px-2 w-full text-start bg-transparent text-gray-400"
+            onClick={()=>{
+              setOpenStateDropdown(!openStateDropdown);
+              setOpenCityDropDown(false);
+            }}>
+              {selectedState || "Select State"}
+            </div>
+            {openStateDropdown && (
+              <ul
+              className="absolute top-full left-0 w-full bg-white rounded-xl shadow-lg border border-gray-200 mt-1 max-h-60 overflow-y-auto z-10">
+                {states.map((data)=>(
+                  <li
+                  key={nanoid()}
+                  onClick={()=>{
+                    setSelectedState(data);
+                    setSelectedCity('');
+                    setOpenStateDropdown(false);
+                  }}
+                  className={`px-4 py-2 hover:bg-blue-100 cursor-pointer ${selectedState === data ? "bg-blue-50 font-medium":""}`}>
+                    {data}
+                  </li>
+                ))}
+              </ul>
+              )
+            }
           </div>
 
           {/*CITY DROPDOWN*/}
           <div
             id="city"
-            className=" shadow-md flex items-center font-poppins border border-blue-50 bg-blue-50 text-gray-400 rounded-xl w-2/4 md:w-2/5 py-2 px-2"
+            className={`relative cursor-pointer shadow-md flex items-center font-poppins border border-blue-50 bg-blue-50 text-gray-400 rounded-xl w-2/4 md:w-2/5 py-2 px-2
+              ${!selectedState ? "opacity-60 cursor-not-allowed":"cursor-pointer"
+
+              }`}
           >
             <SlMagnifier />
-            <select
-              key={city.name}
-              className="focus:outline-none appearance-none px-2 bg-transparent w-full"
-              value={selectedCity}
-              disabled={!selectedState}
-              onChange={(e)=>setSelectedCity(e.target.value)}
-            >
-              <option value="City">City</option>
-              {city.map((cities) => (
-                <option key={nanoid()} value={cities}>
-                  {cities}
-                </option>
-              ))}
-            </select>
+            <div
+            className="px-2 w-full bg-transparent text-gray-400 text-start"
+            onClick={()=>{
+              if(selectedState){
+                setOpenCityDropDown(!openCityDropdown);
+                setOpenStateDropdown(false);
+              }
+            }}>
+              {selectedCity || "Select City"}
+            </div>
+            {openCityDropdown && selectedState && (
+              <ul
+              className="absolute top-full left-0 w-full bg-white rounded-xl shadow-lg borer border-gray-200 mt-1 max-h-60 overflow-y-auto z-10">
+                {city.map((cities)=>(
+                  <li
+                  key={nanoid()}
+                  onClick={()=>{
+                    setSelectedCity(cities);
+                    setOpenCityDropDown(false);
+                  }}
+                  className={`px-4 py-2 hover:bg-blue-100 cursor-pointer ${
+                      selectedCity === cities ? "bg-blue-50 font-medium" : ""
+                    }`}
+                    >
+                    {cities}
+                  </li>
+                ))}
+              </ul>
+            )
+            }
           </div>
         </div>
 
