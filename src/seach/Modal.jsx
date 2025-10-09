@@ -26,10 +26,10 @@ export default function ConfirmAppointment({
     }
 
     const booking = {
-      hospital,
-      date: slot?.date,
-      time: slot?.time,
-      email,
+      ...hospital,
+      bookingDate: slot?.date,
+      bookingTime: slot?.time,
+      bookingEmail: email,
     };
 
     const existing = JSON.parse(localStorage.getItem("bookings")) || [];
