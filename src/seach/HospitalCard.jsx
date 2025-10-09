@@ -16,7 +16,7 @@ export default function Hospitals({ data, isBookingPage = false }) {
   const hospitalInfo = data.hospital || data;
 
   const displayDate = data.date || data.bookingDate || "";
-  const displayTime = data.time || data.bookngTime || "";
+  const displayTime = data.time || data.bookingTime || "";
 
   return (
     <div className="mb-10">

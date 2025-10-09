@@ -44,7 +44,7 @@ export default function BookingDetails() {
           {handleSearch.length > 0 ? (
             handleSearch.map((booking) => (
                 <li
-                key={booking.hospital["Provider ID"]}
+                key={booking["Provider ID"]}
                 >
               <HospitalCard
                 data={booking}
