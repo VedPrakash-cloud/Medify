@@ -26,7 +26,7 @@ export default function NavBar() {
           <Link>Surgeries</Link>
           <Link>Software for Provider</Link>
           <Link>Facilities</Link>
-          <Link to="booking">
+          <Link to="my-bookings">
             <button className="bg-sky-500 rounded-md px-4 py-3 text-white">
                 My Bookings
             </button>
@@ -49,7 +49,7 @@ export default function NavBar() {
           <Link>Surgeries</Link>
           <Link>Software for Provider</Link>
           <Link>Facilities</Link>
-          <Link to ='booking'>
+          <Link to ='my-bookings'>
             <button className="bg-sky-500 rounded-md px-4 py-3 text-white">
               My Bookings
             </button>

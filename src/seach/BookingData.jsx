@@ -14,7 +14,7 @@ export default function BookingDetails() {
   }, []);
 
   const handleSearch = bookings.filter((item)=>
-    item.hospital["Hospital Name"].toLowerCase().includes(search.toLowerCase())
+    (item.hospital?.["Hospital Name"] || item["Hospital Name"] || "" ).toLowerCase().includes(search.toLowerCase())
   )
 
   return (
